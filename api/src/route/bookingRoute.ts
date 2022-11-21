@@ -1,8 +1,12 @@
 import { Router } from "express";
+import BookController from '../controller/bookControler';
 
-const router = Router()
+const bookingRouter = Router()
+const booking = new BookController()
 
-router.get('/', )
-router.post('/', )
+bookingRouter.get('/:userId', booking.getMyBookings)
+bookingRouter.post('/',booking.saveBooking)
+bookingRouter.delete('/:bookingId', booking.deleteBooking)
+bookingRouter.put('/:bookingId', booking.updateBooking)
 
-export default router
+export default bookingRouter

@@ -1,6 +1,8 @@
+import { time } from 'console'
 import {Schema, model, Document, Types} from 'mongoose'
 
 export interface IBooking extends Document {
+    heading: string,
     userId: Types.ObjectId,
     date: Date,
     technology: string[],
@@ -9,6 +11,9 @@ export interface IBooking extends Document {
 }
 
 const bookingSchema = new Schema({
+    heading: {
+        type: String
+    },
     userId: {
         type: Types.ObjectId,
         ref: 'user'
