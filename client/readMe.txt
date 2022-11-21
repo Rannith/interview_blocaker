@@ -1,3 +1,3 @@
-Interview blocker - Frontend 
-using React TypeScript
+Interview blocker
+Frontend using React TypeScript
 Webpack config
