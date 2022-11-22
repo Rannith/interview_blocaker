@@ -1,0 +1,42 @@
+[
+    {
+      "id": 1,
+      "meetingName": "Interview",
+      "technology": "React Js",
+      "date": "23/11/2022",
+      "startTime": "11:00 am",
+      "endTime": "11:30 am"
+    },
+    {
+      "id": 2,
+      "meetingName": "Review",
+      "technology": "Node Js",
+      "date": "24/11/2022",
+      "startTime": "03:30 pm",
+      "endTime": "04:30 pm"
+    },
+    {
+      "id": 3,
+      "meetingName": "Quick Call",
+      "technology": "Python",
+      "date": "23/11/2022",
+      "startTime": "10:00 am",
+      "endTime": "10:30 am"
+    },
+    {
+      "id": 4,
+      "meetingName": "Interview-05",
+      "technology": "Nest Js",
+      "date": "25/11/2022",
+      "startTime": "04:00 pm",
+      "endTime": "05:30 pm"
+    },
+    {
+      "id": 5,
+      "meetingName": "Swap Review",
+      "technology": "Angular",
+      "date": "24/11/2022",
+      "startTime": "10:30 am",
+      "endTime": "11:30 am"
+    }
+  ]
