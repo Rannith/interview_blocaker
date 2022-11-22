@@ -13,9 +13,9 @@ table {
 th,
 td {
     border: 1px solid #ffffff;
-    text-align: left;
+    text-align: center;
     padding: 8px;
-    font-size: 32px;
+    font-size: 25px;
 }
 
 th {
@@ -28,7 +28,8 @@ td {
 
 form {
     display: flex;
-    gap: 5px;
+    /* flex-direction: column; */
+    gap: 15px;
 }
 
 form td:last-child {
@@ -37,5 +38,10 @@ form td:last-child {
 }
 
 form * {
-    font-size: 28px;
+    font-size: 20px;
+}
+
+input[type="text"] {
+    width: 800px;
+    text-align: center;
 }
