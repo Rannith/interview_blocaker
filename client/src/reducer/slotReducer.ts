@@ -4,7 +4,7 @@ import { SlotActionsTypes, SlotState } from "../shared/types/type";
 const initialState: SlotState = {
     slots: [{}],
     slot: {
-        heading: '',
+        meetingName: '',
         userId: null,
         date: null,
         technology: null,

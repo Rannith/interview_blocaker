@@ -20,10 +20,12 @@ interface InputFieldUser {
 }
 
 interface InputFieldSlot {
-    heading?: string,
     userId?: number,
-    date?: Date,
-    technology?: string[],
+    meetingName?: string,
+    technology?: any,
+    date?: any
+    // technology?: string[],
+    // date?: Date,
     startTime?: string,
     endTime?: string
 }
