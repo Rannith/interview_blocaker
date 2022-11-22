@@ -10,6 +10,15 @@ class BaseRepository {
 
         return false
     }
+
+    public checkContent = async (Book: Model<IBooking, {}, {}, {}, any>, userId: string | Schema.Types.ObjectId) => {
+        const bookedSlots = await Book.find({ userId: userId })
+
+        if (bookedSlots.length <= 0)
+            return true
+
+        return false
+    }
 }
 
 export default BaseRepository

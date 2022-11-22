@@ -14,6 +14,9 @@ class BookRepository {
     }
 
     public getMyBookings = async (Book: Model<IBooking, {}, {}, {}, any>, userId: string | Schema.Types.ObjectId) => {
+        if(await this.baseRepository.checkContent(Book, userId)){
+            throw ({status: 404, message: "No Content"})
+        }
         const dbResult = await Book.find({ userId: userId })
 
         return dbResult
