@@ -1,4 +1,4 @@
-import React, { Dispatch, useState } from "react";
+import React, { Dispatch, useEffect, useState } from "react";
 import "./Table.css";
 import data from "../../db.json";
 import { InputFieldSlot } from "../shared/types/type";
@@ -7,13 +7,13 @@ import ReadRow from "./tableRow/ReadRow";
 import EditRow from "./tableRow/EditRow";
 import TableRows from "./TableRows";
 import { store } from "../store";
-import { addSlot } from "../action/action";
-import RowTable from "./RowTable";
+import { addSlot, deleteSlot, getUserSlot } from "../action/action";
+// import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 const New = () => {
 
-    const [values, setValues] = useState(data);
-    const [rowsData, setRowsData] = useState([]);
+    const [values, setValues] = useState<any>(data);
+    const [rowsData, setRowsData] = useState<any>([]);
 
     const [editData, setEditData] = useState<InputFieldSlot>(initialStateSlot);
     const [editId, setEditId] = useState(null);
@@ -23,17 +23,31 @@ const New = () => {
     const addTableRows = () => {
         console.log("add");
         
-        const rowsInput = dispatchStore(addSlot)
-        // const rowsInput = { initialStateSlot }  
+        // const rowsInput = dispatchStore(addSlot)
+        const rowsInput = { initialStateSlot }  
         setRowsData([...rowsData, rowsInput])
 
     }
+
+    // useEffect(() => {
+    //     dispatchStore(getUserSlot())
+    // })
 
     const handleChange = (index, e) => {
         const { name, value } = e.target;
         const rowsInput = [...rowsData];
         rowsInput[index][name] = value;
         setRowsData(rowsInput);
+    }
+
+    const handleAdd = (e:React.MouseEvent) => {
+        e.preventDefault()
+        console.log("added",rowsData[0]);
+        delete rowsData[0].initialStateSlot;
+        console.log("roww data : ", rowsData[0]);
+        
+        dispatchStore(addSlot(rowsData[0]));
+        
     }
 
     const handleEditFormChange = (e) => {
@@ -88,13 +102,21 @@ const New = () => {
     };
 
     const handleDeleteClick = (valueId) => {
+        console.log("delete");
+        
         const newvalues = [...values];
-
-        const index = values.findIndex((value) => value.id === valueId);
-
-        newvalues.splice(index, 1);
+        dispatchStore(deleteSlot(valueId))
+        
 
         setValues(newvalues);
+
+        // const newvalues = [...values];
+
+        // const index = values.findIndex((value) => value.id === valueId);
+
+        // newvalues.splice(index, 1);
+
+        // setValues(newvalues);
     };
 
 
@@ -102,11 +124,11 @@ const New = () => {
         <>
             <button onClick={addTableRows} >ADD ROW</button>
             <br /><br />
-            <div className="container">
-                <div className="row">
-                    <div className="col-sm-8">
+            <div className="app-container">
+                {/* <div className="row">
+                    <div className="col-sm-8"> */}
                         <form onSubmit={handleEditFormSubmit}>
-                            <table className="table">
+                            <table>
                                 <thead>
                                     <tr>
                                         <th>Meeting Name</th>
@@ -118,8 +140,7 @@ const New = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <>
-                                    {values.map((value) => (
+                                    {values && values.map((value) => (
                                         <>
                                             {editId === value.id ? (
                                                 <EditRow editData={editData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} />
@@ -128,24 +149,14 @@ const New = () => {
                                             )}
                                         </>
                                     ))}
-                                    {/* {rowsData.map((value) => {
-                                        <>
-                                            {rowsData === value.id ? (
-                                                <RowTable rowsData={rowsData} handleChange={handleChange} handleCancelClick={handleCancelClick} />
-                                            ) : (
-                                                <TableRows rowsData={rowsData} handleChange={handleChange} handleCancelClick={handleCancelClick} />
-                                            )}
-                                        </>
-                                    })} */}
-                                    </>
-                                    <TableRows rowsData={rowsData} handleChange={handleChange} handleCancelClick={handleCancelClick} />
+                                    <TableRows rowsData={rowsData} handleChange={handleChange} handleAdd={handleAdd} handleCancelClick={handleCancelClick} />
                                 </tbody>
                             </table>
                         </form>
-                    </div>
+                    {/* </div>
                     <div className="col-sm-4">
-                    </div>
-                </div>
+                    </div> */}
+                {/* </div> */}
             </div>
         </>
     )

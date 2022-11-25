@@ -1,12 +1,17 @@
 import axios from "axios";
 import { Dispatch } from "react";
-import { InputFieldSlot } from "../shared/types/type";
+import { InputFieldSlot, UserState } from "../shared/types/type";
 import * as types from "./actionType";
 
-export const mySlots = (id: any): any => ({
+export const mySlots = (slots: UserState): any => ({
     type: types.GET_MY_SLOTS,
-    payload: id
+    payload: slots
 })
+
+// export const mySlots = (id: any): any => ({
+//     type: types.GET_MY_SLOTS,
+//     payload: id
+// })
 
 export const addSlotSuccess = (values: InputFieldSlot): any => ({
     type: types.ADD_SLOT,
@@ -33,10 +38,11 @@ export const getErrorMessage = (message) => ({
     payload: message
 })
 
-export const getMySlot = (id: any) => (
+export const getUserSlot = () => (
     dispatch: Dispatch<any>
 ) => {
-    axios.get(`http://localhost:8080/booking/${id}`, id)
+    console.log("hi hi");
+    axios.get("http://localhost:8080/booking")
         .then((res) => {
             if (res.status === 200) {
                 dispatch(mySlots(res.data));
@@ -48,10 +54,10 @@ export const getMySlot = (id: any) => (
         })
 }
 
-export const addSlot = (values: InputFieldSlot) => (
+export const addSlot = (values: any) => (
     dispatch: Dispatch<any>
 ) => {
-    console.log("bye bye");
+    console.log("bye bye", values);
     
     axios.post("http://localhost:8080/booking", values)
         .then((res) => {
@@ -98,3 +104,18 @@ export const deleteSlot = (id: any) => (
             dispatch(getErrorMessage(`This slot ID: ${id} have not deleted`))
         })
 }
+
+// export const getUserSlot = (id: any) => (
+//     dispatch: Dispatch<any>
+// ) => {
+//     axios.get(`http://localhost:8080/booking/${id}`, id)
+//         .then((res) => {
+//             if (res.status === 200) {
+//                 dispatch(mySlots(res.data));
+//                 console.log("Action all slot: ", res.data);
+//             }
+//         })
+//         .catch((error) => {
+//             console.log("Error in all slot dispatch: ", error.response.data.error);
+//         })
+// }
