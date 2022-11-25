@@ -5,6 +5,7 @@ import { InputFieldSlot } from "../shared/types/type";
 import { initialStateSlot } from "../shared/types/types";
 import ReadRow from "./tableRow/ReadRow";
 import EditRow from "./tableRow/EditRow";
+// import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 const Table = () => {
 
