@@ -1,0 +1,1 @@
+export const dateValue: string = "1/1/2011 "
