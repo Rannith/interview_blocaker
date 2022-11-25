@@ -22,9 +22,9 @@ const New = () => {
 
     const addTableRows = () => {
         console.log("add");
-        
+
         // const rowsInput = dispatchStore(addSlot)
-        const rowsInput = { initialStateSlot }  
+        const rowsInput = { initialStateSlot }
         setRowsData([...rowsData, rowsInput])
 
     }
@@ -34,20 +34,29 @@ const New = () => {
     // })
 
     const handleChange = (index, e) => {
-        const { name, value } = e.target;
-        const rowsInput = [...rowsData];
-        rowsInput[index][name] = value;
-        setRowsData(rowsInput);
+        if (index === "technology") {
+            console.log("index : ", index);
+            console.log("eve : ", e.target.value);
+
+            const rowsInput = [...rowsData];
+            rowsInput[0][index] = e.target.value;
+            setRowsData(rowsInput);
+        } else {
+            const { name, value } = e.target;
+            const rowsInput = [...rowsData];
+            rowsInput[index][name] = value;
+            setRowsData(rowsInput);
+        }
     }
 
-    const handleAdd = (e:React.MouseEvent) => {
+    const handleAdd = (e: React.MouseEvent) => {
         e.preventDefault()
-        console.log("added",rowsData[0]);
+        console.log("added", rowsData[0]);
         delete rowsData[0].initialStateSlot;
         console.log("roww data : ", rowsData[0]);
-        
+
         dispatchStore(addSlot(rowsData[0]));
-        
+
     }
 
     const handleEditFormChange = (e) => {
@@ -97,16 +106,16 @@ const New = () => {
 
     const handleCancelClick = () => {
         console.log("cancel");
-        
+
         setEditId(null);
     };
 
     const handleDeleteClick = (valueId) => {
         console.log("delete");
-        
+
         const newvalues = [...values];
         dispatchStore(deleteSlot(valueId))
-        
+
 
         setValues(newvalues);
 
@@ -127,33 +136,33 @@ const New = () => {
             <div className="app-container">
                 {/* <div className="row">
                     <div className="col-sm-8"> */}
-                        <form onSubmit={handleEditFormSubmit}>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Meeting Name</th>
-                                        <th>Technology</th>
-                                        <th>Date</th>
-                                        <th>Start Time</th>
-                                        <th>End Time</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {values && values.map((value) => (
-                                        <>
-                                            {editId === value.id ? (
-                                                <EditRow editData={editData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} />
-                                            ) : (
-                                                <ReadRow value={value} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick} />
-                                            )}
-                                        </>
-                                    ))}
-                                    <TableRows rowsData={rowsData} handleChange={handleChange} handleAdd={handleAdd} handleCancelClick={handleCancelClick} />
-                                </tbody>
-                            </table>
-                        </form>
-                    {/* </div>
+                <form onSubmit={handleEditFormSubmit}>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Meeting Name</th>
+                                <th>Technology</th>
+                                <th>Date</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {values && values.map((value) => (
+                                <>
+                                    {editId === value.id ? (
+                                        <EditRow editData={editData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} />
+                                    ) : (
+                                        <ReadRow value={value} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick} />
+                                    )}
+                                </>
+                            ))}
+                            <TableRows rowsData={rowsData} handleChange={handleChange} handleAdd={handleAdd} handleCancelClick={handleCancelClick} />
+                        </tbody>
+                    </table>
+                </form>
+                {/* </div>
                     <div className="col-sm-4">
                     </div> */}
                 {/* </div> */}
