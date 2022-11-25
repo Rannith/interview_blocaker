@@ -5,6 +5,7 @@ export const initialStateUser = {
 }
 
 export const initialStateSlot = {
+    id:'',
     meetingName: '',
     technology: '',
     date: '',

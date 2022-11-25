@@ -25,7 +25,21 @@ const slotReducer = (state: SlotState = initialState, action: SlotActionsTypes):
                 successMessage: action.payload,
                 errorMessage: ""
             }
-        case types.BOOK_SLOTS:
+        case types.ADD_SLOT:
+            return {
+                ...state,
+                slot: action.payload,
+                successMessage: action.payload,
+                errorMessage: ""
+            }
+        case types.EDIT_SLOT:
+            return {
+                ...state,
+                slot: action.payload,
+                successMessage: action.payload,
+                errorMessage: ""
+            }
+        case types.DELETE_SLOT:
             return {
                 ...state,
                 slot: action.payload,
