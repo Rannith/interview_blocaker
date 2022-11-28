@@ -35,6 +35,8 @@ const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => 
     const theme = useTheme();
 
     const handleChangess = (event) => {
+        console.log("trigged");
+        
         const {
             target: { value },
         } = event;
@@ -42,6 +44,7 @@ const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => 
             // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
         );
+        handleChange("technology", event)
     };
 
     function getStyles(name, personName, theme) {

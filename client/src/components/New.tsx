@@ -34,10 +34,19 @@ const New = () => {
     })
 
     const handleChange = (index, e) => {
-        const { name, value } = e.target;
-        const rowsInput = [...rowsData];
-        rowsInput[index][name] = value;
-        setRowsData(rowsInput);
+        if (index === "technology") {
+            console.log("index : ", index);
+            console.log("eve : ", e.target.value);
+
+            const rowsInput = [...rowsData];
+            rowsInput[0][index] = e.target.value;
+            setRowsData(rowsInput);
+        } else {
+            const { name, value } = e.target;
+            const rowsInput = [...rowsData];
+            rowsInput[index][name] = value;
+            setRowsData(rowsInput);
+        }
     }
 
     const handleAdd = (e: React.MouseEvent) => {
@@ -131,12 +140,12 @@ const New = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th>MEETING NAME</th>
-                                <th>TECHNOLOGY</th>
-                                <th>DATE</th>
-                                <th>START TIME</th>
-                                <th>END TIME</th>
-                                <th>ACTIONS</th>
+                                <th>Meeting Name</th>
+                                <th>Technology</th>
+                                <th>Date</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
