@@ -14,7 +14,7 @@ const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => 
     const [technologyArray, setTech] = useState([])
 
     const options = [
-        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'React Js', label: 'React Js' },
         { value: 'strawberry', label: 'Strawberry' },
         { value: 'vanilla', label: 'Vanilla' }
     ]
@@ -66,7 +66,7 @@ const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => 
                 let { meetingName, technology, date, startTime, endTime } = data;
                 return (
                     <tr key={index}>
-                        <td><input type="text" value={meetingName} onChange={(evnt) => (handleChange(index, evnt))} name="meetingName" className="form-control" /> </td>
+                        <td><input type="text" value={meetingName} onChange={(event) => (handleChange(index, event))} name="meetingName" className="form-control" /> </td>
                         <td>
                             <Select
                                 multiple
@@ -94,13 +94,13 @@ const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => 
                             </Select>
 
                         </td>
-                        {/* <td><input type="text" value={technology} onChange={(evnt) => (handleChange(index, evnt))} name="technology" className="form-control" /> </td> */}
-                        <td><input type="text" value={date} onChange={(evnt) => (handleChange(index, evnt))} name="date" className="form-control" /> </td>
-                        <td><input type="text" value={startTime} onChange={(evnt) => (handleChange(index, evnt))} name="startTime" className="form-control" /></td>
-                        <td><input type="text" value={endTime} onChange={(evnt) => (handleChange(index, evnt))} name="endTime" className="form-control" /> </td>
+                        {/* <td><input type="text" value={technology} onChange={(event) => (handleChange(index, event))} name="technology" className="form-control" /> </td> */}
+                        <td><input type="text" value={date} onChange={(event) => (handleChange(index, event))} name="date" className="form-control" /> </td>
+                        <td><input type="text" value={startTime} onChange={(event) => (handleChange(index, event))} name="startTime" className="form-control" /></td>
+                        <td><input type="text" value={endTime} onChange={(event) => (handleChange(index, event))} name="endTime" className="form-control" /> </td>
                         <td>
-                            <button type="submit" onClick={handleAdd}>Save</button>
-                            <button type="button" onClick={handleCancelClick}>Cancel</button>
+                            <button type="submit" className="submitButton" onClick={handleAdd}>Save</button>
+                            <button type="button" className="submitButton" onClick={handleCancelClick}>Cancel</button>
                         </td>
                     </tr>
                 )
@@ -110,4 +110,4 @@ const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => 
     )
 }
 
-export default TableRows;
+export default TableRows;   

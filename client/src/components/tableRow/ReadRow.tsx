@@ -29,8 +29,8 @@ const ReadRow = ({ value, handleEditClick, handleDeleteClick }) => {
             <td>{value.startTime}</td>
             <td>{value.endTime}</td>
             <td>
-                <button type='button' onClick={(e) => handleEditClick(e, value)}>Edit</button>
-                <button type='button' onClick={() => handleDeleteClick(value.id)}>Delete</button>
+                <button type='button' className='submitButton' onClick={(e) => handleEditClick(e, value)}>Edit</button>
+                <button type='button' className='submitButton' onClick={() => handleDeleteClick(value.id)}>Delete</button>
             </td>
         </tr>
     );

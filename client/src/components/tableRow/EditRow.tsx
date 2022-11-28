@@ -21,8 +21,8 @@ const EditRow = ({ editData, handleEditFormChange, handleCancelClick }) => {
                 <input type="text" name="endTime" placeholder="Enter the meeting end time" value={editData.endTime} onChange={handleEditFormChange} />
             </td>
             <td>
-                <button type="submit">Save</button>
-                <button type="button" onClick={handleCancelClick}>Cancel</button>
+                <button type="submit" className='submitButton' >Save</button>
+                <button type="button" className='submitButton' onClick={handleCancelClick}>Cancel</button>
             </td>
         </tr>
     );

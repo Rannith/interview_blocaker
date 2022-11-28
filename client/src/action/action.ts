@@ -44,10 +44,10 @@ export const getUserSlot = () => (
     console.log("hi hi");
     axios.get("http://localhost:8080/booking")
         .then((res) => {
-            if (res.status === 200) {
+            // if (res.status === 200) {
                 dispatch(mySlots(res.data));
                 console.log("Action all slot: ", res.data);
-            }
+            // }
         })
         .catch((error) => {
             console.log("Error in all slot dispatch: ", error.response.data.error);
