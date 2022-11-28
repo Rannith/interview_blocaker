@@ -12,18 +12,19 @@ table {
 
 th,
 td {
-    border: 1px solid #ffffff;
+    border: 1px solid black;
     text-align: center;
     padding: 8px;
     font-size: 25px;
 }
 
 th {
-    background-color: rgb(180, 173, 133);
+    background-color: rgb(135, 151, 151);
+    color: black;
 }
 
 td {
-    background-color: rgb(153, 153, 149);
+    background-color: rgb(213, 218, 219);
 }
 
 form {
@@ -40,8 +41,20 @@ form td:last-child {
 form * {
     font-size: 20px;
 }
-/* 
-input[type="text"] {
-    width: 800px;
-    text-align: center;
-} */
+
+.submitButton {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 8px;
+}
+
+.addButton {
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 25px;
+}

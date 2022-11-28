@@ -127,12 +127,12 @@ const Table = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th>Meeting Name</th>
-                                <th>Technology</th>
-                                <th>Date</th>
-                                <th>Start Time</th>
-                                <th>End Time</th>
-                                <th>Actions</th>
+                                <th>MEETING NAME</th>
+                                <th>TECHNOLOGY</th>
+                                <th>DATE</th>
+                                <th>START TIME</th>
+                                <th>END TIME</th>
+                                <th>ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>

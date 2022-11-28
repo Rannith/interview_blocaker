@@ -29,9 +29,9 @@ const New = () => {
 
     }
 
-    // useEffect(() => {
-    //     dispatchStore(getUserSlot())
-    // })
+    useEffect(() => {
+        dispatchStore(getUserSlot())
+    })
 
     const handleChange = (index, e) => {
         if (index === "technology") {
@@ -131,7 +131,7 @@ const New = () => {
 
     return (
         <>
-            <button onClick={addTableRows} >ADD ROW</button>
+            <button className="addButton" onClick={addTableRows} >ADD ROW</button>
             <br /><br />
             <div className="app-container">
                 {/* <div className="row">

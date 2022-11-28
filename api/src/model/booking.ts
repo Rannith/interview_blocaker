@@ -11,7 +11,7 @@ export interface IBooking extends Document {
 }
 
 const bookingSchema = new Schema({
-    heading: {
+    meetingName: {
         type: String
     },
     userId: {
