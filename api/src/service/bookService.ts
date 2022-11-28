@@ -1,5 +1,6 @@
 import BookRepository from "../repository/bookRepository"
 import Booking, { IBooking } from '../model/booking'
+import Technology from "../model/technology"
 import { ObjectId, Schema, UpdateQuery } from "mongoose"
 
 class BookService {
@@ -20,6 +21,12 @@ class BookService {
         const getMyBookings = await this.bookRepository.getMyBookings(Booking, userId)
 
         return getMyBookings
+    }
+
+    public getTechnology = async () => {
+        const getTechnology = await this.bookRepository.getTechnology(Technology)
+
+        return getTechnology
     }
 
     public deleteBooking = async (bookingId: string | Schema.Types.ObjectId) => {
