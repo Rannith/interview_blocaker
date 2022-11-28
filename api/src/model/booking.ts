@@ -1,5 +1,4 @@
-import { time } from 'console'
-import { Schema, model, Document, Types } from 'mongoose'
+import {Schema, model, Document, Types} from 'mongoose'
 
 export interface IBooking extends Document {
     meetingName: string,

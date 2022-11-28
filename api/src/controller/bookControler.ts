@@ -37,6 +37,17 @@ class BookController {
         }
     }
 
+    public getTechnology = async (req: Request, res: Response, next: NextFunction) => {
+        try {            
+            const getTechnology = await this.bookService.getTechnology()
+
+            return res.status(200).json(this.responseWrapper.success("Data Retrived Successfully", getTechnology, res.statusCode))
+        }
+        catch (err) {
+            next(err)
+        }
+    }
+
     public deleteBooking = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const deleteBooking = await this.bookService.deleteBooking(req.params.bookingId)

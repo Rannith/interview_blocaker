@@ -1,5 +1,6 @@
 import { Model, ObjectId, Types, Schema, UpdateQuery } from 'mongoose';
 import { IBooking } from "../model/booking"
+import { ITechnology } from '../model/technology';
 import BaseRepository from './baseRepository';
 
 class BookRepository {
@@ -18,6 +19,12 @@ class BookRepository {
             throw ({status: 404, message: "No Content"})
         }
         const dbResult = await Book.find({ userId: userId })
+
+        return dbResult
+    }
+
+    public getTechnology = async (Technology: Model<ITechnology, {}, {}, {}, any>) => {
+        const dbResult = await Technology.find()
 
         return dbResult
     }
