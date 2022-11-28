@@ -38,7 +38,7 @@ class BookController {
     }
 
     public getTechnology = async (req: Request, res: Response, next: NextFunction) => {
-        try {
+        try {            
             const getTechnology = await this.bookService.getTechnology()
 
             return res.status(200).json(this.responseWrapper.success("Data Retrived Successfully", getTechnology, res.statusCode))
