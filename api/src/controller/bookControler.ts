@@ -12,6 +12,7 @@ class BookController {
 
     public saveBooking = async (req: Request, res: Response, next: NextFunction) => {
         try {
+            console.log(req.body)
             const saveBooking = await this.bookService.saveBooking(req.body)
 
             return res.status(201).json(this.responseWrapper.success("Slot Booked Successfully", saveBooking, res.statusCode))
@@ -54,7 +55,7 @@ class BookController {
         try {
             const updateBooking = await this.bookService.updateBooking(req.params.bookingId, req.body)
 
-            return res.status(200).json(this.responseWrapper.success(`${updateBooking?.heading} updated Successfully`, updateBooking, res.statusCode))
+            return res.status(200).json(this.responseWrapper.success(`${updateBooking?.meetingName} updated Successfully`, updateBooking, res.statusCode))
         }
         catch (err) {
             next(err)

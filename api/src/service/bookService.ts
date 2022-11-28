@@ -9,6 +9,8 @@ class BookService {
     }
 
     public saveBooking = async (bookPayload: Object) => {
+        console.log(bookPayload);
+        
         const book = new Booking(bookPayload)
 
         const saveBooking = await this.bookRepository.saveBooking(book)
