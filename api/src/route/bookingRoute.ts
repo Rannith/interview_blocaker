@@ -5,7 +5,7 @@ const bookingRouter = Router()
 const booking = new BookController()
 
 bookingRouter.get('/:userId', booking.getMyBookings)
-bookingRouter.post('/',booking.saveBooking)
+bookingRouter.post('/:userId',booking.saveBooking)
 bookingRouter.delete('/:bookingId', booking.deleteBooking)
 bookingRouter.put('/:bookingId', booking.updateBooking)
 

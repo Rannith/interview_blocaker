@@ -13,7 +13,9 @@ class BookController {
     public saveBooking = async (req: Request, res: Response, next: NextFunction) => {
         try {
             console.log(req.body)
-            const saveBooking = await this.bookService.saveBooking(req.body)
+            const { meetingName, date, startTime, endTime, technology } = req.body
+            const { userId } = req.params
+            const saveBooking = await this.bookService.saveBooking(meetingName, date, startTime, endTime, technology, userId)
 
             return res.status(201).json(this.responseWrapper.success("Slot Booked Successfully", saveBooking, res.statusCode))
         }
