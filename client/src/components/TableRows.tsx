@@ -8,6 +8,9 @@ import makeAnimated from 'react-select/animated';
 import { Box } from "@mui/system";
 import { Chip, OutlinedInput, useTheme } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
+import '@progress/kendo-theme-default/dist/all.css';
+import { DatePicker } from '@progress/kendo-react-dateinputs';
+import { TimePicker } from '@progress/kendo-react-dateinputs';
 
 const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => {
 
@@ -36,7 +39,7 @@ const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => 
 
     const handleChangess = (event) => {
         console.log("trigged");
-        
+
         const {
             target: { value },
         } = event;
@@ -56,16 +59,18 @@ const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => 
         };
     }
 
-    console.log("techh", technologyArray);
-    console.log("data row", rowsData);
-    
+    const min = new Date()
+    const max = new Date()
+    max.setDate(max.getDate() + 7)
+
+    console.log("row : ", rowsData);
     
 
     return (
 
         <>
             {rowsData && rowsData.map((data: any, index: any) => {
-                
+
                 let { meetingName, technology, date, startTime, endTime } = data;
                 return (
                     <tr key={index}>
@@ -98,7 +103,40 @@ const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => 
 
                         </td>
                         {/* <td><input type="text" value={technology} onChange={(evnt) => (handleChange(index, evnt))} name="technology" className="form-control" /> </td> */}
-                        <td><input type="text" value={date} onChange={(evnt) => (handleChange(index, evnt))} name="date" className="form-control" /> </td>
+                        <td>
+                            <DatePicker
+                                format={{
+                                    year: "numeric",
+                                    month: "short",
+                                    date: "short"
+                                }}
+                                min={min}
+                                max={max}
+                                value={date}
+                                onChange={(evnt) => (handleChange(index, evnt))}
+                                name="date"
+                                className="form-control"
+                            />
+                        </td>
+                        <td>
+                            {
+                                // new Date().toLocaleDateString() === rowsData.toLocaleDateString() ?
+                                //     <TimePicker
+                                //         value={startTime}
+                                //         placeholder="Start Time"
+                                //         min={minTime}
+                                //         format={"HH:mm"}
+                                //         // onChange={e => setStart(e.target.value)}
+                                //     /> :
+                                //     <TimePicker
+                                //         value={start}
+                                //         placeholder="Start Time"
+                                //         format={"HH:mm"}
+                                //         onChange={e => setStart(e.target.value)}
+                                //     />
+                            }
+                        </td>
+                        {/* <td><input type="text" value={date} onChange={(evnt) => (handleChange(index, evnt))} name="date" className="form-control" /> </td> */}
                         <td><input type="text" value={startTime} onChange={(evnt) => (handleChange(index, evnt))} name="startTime" className="form-control" /></td>
                         <td><input type="text" value={endTime} onChange={(evnt) => (handleChange(index, evnt))} name="endTime" className="form-control" /> </td>
                         <td>

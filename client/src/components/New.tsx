@@ -8,7 +8,6 @@ import EditRow from "./tableRow/EditRow";
 import TableRows from "./TableRows";
 import { store } from "../store";
 import { addSlot, deleteSlot, getUserSlot } from "../action/action";
-// import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 const New = () => {
 
@@ -44,7 +43,7 @@ const New = () => {
         } else {
             const { name, value } = e.target;
             const rowsInput = [...rowsData];
-            rowsInput[index][name] = value;
+            name === 'date' ? rowsInput[index][name] = value?.toLocaleDateString() : name === 'startTime' || name === 'endTime' ? rowsInput[index][name] = value?.toLocaleTimeString() : rowsInput[index][name] = value;
             setRowsData(rowsInput);
         }
     }
