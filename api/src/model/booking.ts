@@ -4,14 +4,14 @@ import {Schema, model, Document, Types} from 'mongoose'
 export interface IBooking extends Document {
     heading: string,
     userId: Types.ObjectId,
-    date: Date,
+    date: string,
     technology: string[],
     startTime: string,
     endTime: string,
 }
 
 const bookingSchema = new Schema({
-    heading: {
+    meetingName: {
         type: String
     },
     userId: {
@@ -19,7 +19,7 @@ const bookingSchema = new Schema({
         ref: 'user'
     },
     date: {
-        type: Date
+        type: String
     },
     technology: {
         type: [String]
