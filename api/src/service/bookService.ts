@@ -2,6 +2,7 @@ import BookRepository from "../repository/bookRepository"
 import Booking, { IBooking } from '../model/booking'
 import Technology from "../model/technology"
 import { ObjectId, Schema, UpdateQuery } from "mongoose"
+import dayjs from 'dayjs';
 
 class BookService {
     bookRepository: BookRepository
@@ -9,8 +10,15 @@ class BookService {
         this.bookRepository = new BookRepository()
     }
 
-    public saveBooking = async (bookPayload: Object) => {
-        const book = new Booking(bookPayload)
+    public saveBooking = async (meetingName:string, date: string | number | Date | dayjs.Dayjs | null | undefined, startTime: any, endTime: any, technology: [string], userId: string) => {
+        const book = new Booking({
+            meetingName: meetingName,
+            date: dayjs(date).format('YYYY-MM-DD'),
+            startTime: startTime,
+            endTime: endTime,
+            technology: technology,
+            usetId: userId
+        })
 
         const saveBooking = await this.bookRepository.saveBooking(book)
 

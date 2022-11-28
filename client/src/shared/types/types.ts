@@ -5,8 +5,9 @@ export const initialStateUser = {
 }
 
 export const initialStateSlot = {
+    id:'',
     meetingName: '',
-    technology: '',
+    technology: [],
     date: '',
     startTime: '',
     endTime: ''

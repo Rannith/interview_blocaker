@@ -1,16 +1,36 @@
 import React from 'react';
+import "../Table.css";
+// import Select from 'react-select';
+// import makeAnimated from 'react-select/animated';
 
-const ReadRow = ({ contact, handleEditClick, handleDeleteClick }) => {
+const ReadRow = ({ value, handleEditClick, handleDeleteClick }) => {
+
+    // const options = [
+    //     { value: 'chocolate', label: 'Chocolate' },
+    //     { value: 'strawberry', label: 'Strawberry' },
+    //     { value: 'vanilla', label: 'Vanilla' }
+    //   ]
+    // const animatedComponents = makeAnimated();
+
     return (
         <tr>
-            <td>{contact.meetingName}</td>
-            <td>{contact.technology}</td>
-            <td>{contact.date}</td>
-            <td>{contact.startTime}</td>
-            <td>{contact.endTime}</td>
+            <td>{value.meetingName}</td>
             <td>
-                <button type='button' onClick={(e) => handleEditClick(e, contact)}>Edit</button>
-                <button type='button' onClick={() => handleDeleteClick(contact.id)}>Delete</button>
+                {value.technology}
+                {/* <Select
+                    closeMenuOnSelect={false}
+                    components={animatedComponents}
+                    defaultValue={[options[4], options[5]]}
+                    isMulti
+                    options={options} */}
+                {/* /> */}
+            </td>
+            <td>{value.date}</td>
+            <td>{value.startTime}</td>
+            <td>{value.endTime}</td>
+            <td>
+                <button type='button' onClick={(e) => handleEditClick(e, value)}>Edit</button>
+                <button type='button' onClick={() => handleDeleteClick(value.id)}>Delete</button>
             </td>
         </tr>
     );
