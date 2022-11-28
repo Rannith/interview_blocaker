@@ -13,7 +13,9 @@ class BookController {
     public saveBooking = async (req: Request, res: Response, next: NextFunction) => {
         try {
             console.log(req.body)
-            const saveBooking = await this.bookService.saveBooking(req.body)
+            const { meetingName, date, startTime, endTime, technology } = req.body
+            const { userId } = req.params
+            const saveBooking = await this.bookService.saveBooking(meetingName, date, startTime, endTime, technology, userId)
 
             return res.status(201).json(this.responseWrapper.success("Slot Booked Successfully", saveBooking, res.statusCode))
         }
@@ -32,6 +34,17 @@ class BookController {
         catch (err) {
             next(err)
             // return res.status(500).json(this.responseWrapper.error(err, res.statusCode))
+        }
+    }
+
+    public getTechnology = async (req: Request, res: Response, next: NextFunction) => {
+        try {            
+            const getTechnology = await this.bookService.getTechnology()
+
+            return res.status(200).json(this.responseWrapper.success("Data Retrived Successfully", getTechnology, res.statusCode))
+        }
+        catch (err) {
+            next(err)
         }
     }
 
