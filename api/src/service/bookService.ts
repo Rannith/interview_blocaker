@@ -25,8 +25,20 @@ class BookService {
         return saveBooking
     }
 
-    public getMyBookings = async (userId: string | Schema.Types.ObjectId) => {
-        const getMyBookings = await this.bookRepository.getMyBookings(Booking, userId)
+    public getMyBookings = async (userId: string | Schema.Types.ObjectId, week: string) => {
+        let dateCopy
+        week === "2" ?
+            dateCopy = new Date(new Date(new Date().setDate(new Date().getDate() + ((7 - new Date().getDay() + 5) % 7 || 7))))
+            :
+            dateCopy = new Date()
+
+        const getFriday = new Date(dateCopy.setDate(dateCopy.getDate() + ((7 - dateCopy.getDay() + 5) % 7 || 7)))
+        // const nextFridayCopy = getFriday
+        // const getLastFriday = new Date(nextFridayCopy.setDate(nextFridayCopy.getDate() - 8))
+        // console.log("last frid : ", getLastFriday);
+        // console.log("commin frid : ", getFriday)
+
+        const getMyBookings = await this.bookRepository.getMyBookings(Booking, userId, getFriday)
 
         return getMyBookings
     }

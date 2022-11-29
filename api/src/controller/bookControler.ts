@@ -27,7 +27,7 @@ class BookController {
 
     public getMyBookings = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const getMyBooking = await this.bookService.getMyBookings(req.params.userId)
+            const getMyBooking = await this.bookService.getMyBookings(req.params.userId, req.params.week)
 
             return res.status(200).json(this.responseWrapper.success("Data Retrived Successfully", getMyBooking, res.statusCode))
         }
