@@ -2,6 +2,7 @@ import { Model, ObjectId, Types, Schema, UpdateQuery } from 'mongoose';
 import { IBooking } from "../model/booking"
 import { ITechnology } from '../model/technology';
 import BaseRepository from './baseRepository';
+import dayjs from 'dayjs';
 
 class BookRepository {
     baseRepository: BaseRepository;
@@ -14,11 +15,21 @@ class BookRepository {
         return dbResult
     }
 
-    public getMyBookings = async (Book: Model<IBooking, {}, {}, {}, any>, userId: string | Schema.Types.ObjectId) => {
-        if(await this.baseRepository.checkContent(Book, userId)){
-            throw ({status: 404, message: "No Content"})
+    public getMyBookings = async (Book: Model<IBooking, {}, {}, {}, any>, userId: string | Schema.Types.ObjectId, friday: Date) => {
+        if (await this.baseRepository.checkContent(Book, userId)) {
+            throw ({ status: 404, message: "No Content" })
         }
-        const dbResult = await Book.find({ userId: userId })
+        // let date = friday.toISOString();
+        // console.log(friday);
+
+        // console.log("LOg  : ", dayjs(friday).format('YYYY-MM-DD'));
+
+        // const val = await Book.find({ userId: userId, date: { $lt: dayjs(friday).format('YYYY-MM-DD'), $gte: new Date(friday.setDate(friday.getDate() - 8)) } })
+
+        // console.log("val : ", val);
+
+        // const dbResult = await Book.find({ userId: userId })
+        const dbResult = await Book.find({ userId: userId, date: { $lt: dayjs(friday).format('YYYY-MM-DD'), $gte: new Date(friday.setDate(friday.getDate() - 8)) } })
 
         return dbResult
     }
