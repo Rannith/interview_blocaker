@@ -10,14 +10,14 @@ class BookService {
         this.bookRepository = new BookRepository()
     }
 
-    public saveBooking = async (meetingName:string, date: string | number | Date | dayjs.Dayjs | null | undefined, startTime: any, endTime: any, technology: [string], userId: string) => {
+    public saveBooking = async (meetingName: string, date: string | number | Date | dayjs.Dayjs | null | undefined, startTime: any, endTime: any, technology: [string], userId: string) => {
         const book = new Booking({
             meetingName: meetingName,
             date: dayjs(date).format('YYYY-MM-DD'),
             startTime: startTime,
             endTime: endTime,
             technology: technology,
-            usetId: userId
+            userId: userId
         })
 
         const saveBooking = await this.bookRepository.saveBooking(book)
@@ -38,7 +38,7 @@ class BookService {
     }
 
     public deleteBooking = async (bookingId: string | Schema.Types.ObjectId) => {
-        const deleteBooking = await this.bookRepository.deleteBooking(Booking,bookingId)
+        const deleteBooking = await this.bookRepository.deleteBooking(Booking, bookingId)
 
         return deleteBooking
     }
