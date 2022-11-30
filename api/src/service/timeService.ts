@@ -2,22 +2,23 @@ import Booking from "../model/booking";
 import TimeRepository from "../repository/timeRepository";
 import * as config from '../utils/config'
 import dayjs from 'dayjs';
+import { ObjectId } from 'mongoose';
 
 class TimeService {
     timeRepository: TimeRepository;
     constructor() {
         this.timeRepository = new TimeRepository()
     }
-    public checkAvailableTime = async (payload: { date: any; startTime: any; endTime: any; }) => {
-        const { date, startTime, endTime } = payload;
+    public checkAvailableTime = async (payload: { date: any; startTime: any; endTime: any; slotId: ObjectId; }) => {
+        const { date, startTime, endTime, slotId } = payload;
         let result
         const inStartTime = new Date(config.dateValue + dayjs(startTime).format('HH:mm'))
         const inEndTime = new Date(config.dateValue + dayjs(endTime).format('HH:mm'))
 
-        if(inStartTime >= inEndTime) {
+        if (inStartTime >= inEndTime) {
             throw ({ status: 400, message: `Start time must be less than end time, your selection ${dayjs(inStartTime).format('hh:mm A')} to ${dayjs(inEndTime).format('hh:mm A')}` })
-        } else if(dayjs(inEndTime).diff(dayjs(inStartTime)) < config.minimumMinute) {
-            throw ({ status: 400, message: `Book slot minimum 30 minutes, you booked ${dayjs(inEndTime).diff(dayjs(inStartTime))/60000} minutes only` })
+        } else if (dayjs(inEndTime).diff(dayjs(inStartTime)) < config.minimumMinute) {
+            throw ({ status: 400, message: `Book slot minimum 30 minutes, you booked ${dayjs(inEndTime).diff(dayjs(inStartTime)) / 60000} minutes only` })
         }
 
         const checkAvailableTime = await this.timeRepository.checkAvailableTime(Booking, date, startTime, endTime)
@@ -26,7 +27,9 @@ class TimeService {
             const startedTime = new Date(config.dateValue + dayjs(element.startTime).format('HH:mm'))
             const endedTime = new Date(config.dateValue + dayjs(element.endTime).format('HH:mm'))
 
-            if (startedTime < inStartTime && inStartTime < endedTime
+            if (slotId === element._id.toString()) {                
+                return { message: "success" }
+            } else if (startedTime < inStartTime && inStartTime < endedTime
                 || startedTime < inEndTime && inEndTime < endedTime
                 || inStartTime < startedTime && startedTime < inEndTime
                 || inStartTime < endedTime && endedTime < inEndTime

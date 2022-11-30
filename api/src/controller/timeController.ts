@@ -11,7 +11,7 @@ class TimeController {
         try {
             const checkAvailability = await this.timeService.checkAvailableTime(req.body)
 
-            return res.status(200).json({ message: checkAvailability ? checkAvailability : "success" })
+            return res.status(200).json({ message: "success" })
         }
         catch (err) {
             next(err)
