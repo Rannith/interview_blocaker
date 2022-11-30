@@ -10,14 +10,14 @@ class BookService {
         this.bookRepository = new BookRepository()
     }
 
-    public saveBooking = async (meetingName:string, date: string | number | Date | dayjs.Dayjs | null | undefined, startTime: any, endTime: any, technology: [string], userId: string) => {
+    public saveBooking = async (meetingName: string, date: string | number | Date | dayjs.Dayjs | null | undefined, startTime: any, endTime: any, technology: [string], userId: string) => {
         const book = new Booking({
             meetingName: meetingName,
             date: dayjs(date).format('YYYY-MM-DD'),
             startTime: startTime,
             endTime: endTime,
             technology: technology,
-            usetId: userId
+            userId: userId
         })
 
         const saveBooking = await this.bookRepository.saveBooking(book)
@@ -25,8 +25,20 @@ class BookService {
         return saveBooking
     }
 
-    public getMyBookings = async (userId: string | Schema.Types.ObjectId) => {
-        const getMyBookings = await this.bookRepository.getMyBookings(Booking, userId)
+    public getMyBookings = async (userId: string | Schema.Types.ObjectId, week: string) => {
+        let dateCopy
+        week === "2" ?
+            dateCopy = new Date(new Date(new Date().setDate(new Date().getDate() + ((7 - new Date().getDay() + 5) % 7 || 7))))
+            :
+            dateCopy = new Date()
+
+        const getFriday = new Date(dateCopy.setDate(dateCopy.getDate() + ((7 - dateCopy.getDay() + 5) % 7 || 7)))
+        // const nextFridayCopy = getFriday
+        // const getLastFriday = new Date(nextFridayCopy.setDate(nextFridayCopy.getDate() - 8))
+        // console.log("last frid : ", getLastFriday);
+        // console.log("commin frid : ", getFriday)
+
+        const getMyBookings = await this.bookRepository.getMyBookings(Booking, userId, getFriday)
 
         return getMyBookings
     }
@@ -38,7 +50,7 @@ class BookService {
     }
 
     public deleteBooking = async (bookingId: string | Schema.Types.ObjectId) => {
-        const deleteBooking = await this.bookRepository.deleteBooking(Booking,bookingId)
+        const deleteBooking = await this.bookRepository.deleteBooking(Booking, bookingId)
 
         return deleteBooking
     }
