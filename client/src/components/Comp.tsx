@@ -145,7 +145,7 @@ function AddDeleteTableRows() {
                                 {slots && slots.map((value) => (
                                     <>
                                         {editId === value._id ? (
-                                            <EditRow rowsData={editData} handleEditFormSubmit={handleEditFormSubmit} handleCancelClick={handleEditCancel} />
+                                            <EditRow rowsData={value} handleEditFormSubmit={handleEditFormSubmit} handleCancelClick={handleEditCancel} />
                                         ) : (
                                             <ReadRow value={value} handleEdit={handleEdit} handleDelete={handleDelete} />
                                         )}

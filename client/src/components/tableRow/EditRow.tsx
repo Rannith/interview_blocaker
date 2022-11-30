@@ -8,10 +8,12 @@ import { MenuProps } from 'react-select';
 import { useSelector } from 'react-redux';
 import { validateTime } from '../../action/action';
 import { store } from '../../store';
+import { showErrorMessage } from '../../shared/utils/alertMessage';
 
 const EditRow = ({ rowsData, handleEditFormSubmit, handleCancelClick }) => {
 
     const { technologyList } = useSelector((state: any) => state.slotData)
+    const { errorMessage } = useSelector((state: any) => state.slotData)
 
     const dispatchStore = store.dispatch as typeof store.dispatch | Dispatch<any>;
 
@@ -60,9 +62,15 @@ const EditRow = ({ rowsData, handleEditFormSubmit, handleCancelClick }) => {
         if (date && startTime) {
             console.log("start time : ", dayjs(startTime).format('hh:mm A'))
             console.log("end time : ", dayjs(endTime).format('hh:mm A'))
-            dispatchStore(validateTime({ date: dayjs(date).format('YYYY-MM-DD'), startTime: startTime, endTime: endTime }))
+            dispatchStore(validateTime({ date: dayjs(date).format('YYYY-MM-DD'), startTime: startTime, endTime: endTime, slotId: rowsData._id }))
         }
     }, [endTime])
+
+    useEffect(() => {
+        if (errorMessage) {
+            showErrorMessage(errorMessage)
+        }
+    }, [errorMessage])
 
     function getStyles(name, personName, theme) {
         return {

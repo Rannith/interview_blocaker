@@ -14,16 +14,26 @@ import { DesktopDatePicker, TimePicker, LocalizationProvider } from "@mui/x-date
 import { store } from "../store";
 import { getTechnology, technology } from '../action/action';
 import { useSelector } from "react-redux";
+import { showErrorMessage } from "../shared/utils/alertMessage";
 
 const TableRows = ({ rowsData, error, handleChange, handleAdd, handleCancelClick }) => {
 
     const dispatchStore = store.dispatch as typeof store.dispatch | Dispatch<any>;
+
+    const { errorMessage } = useSelector((state: any) => state.slotData)
+
     const [technologyArray, setTech] = useState([])
     let max = dayjs().add(7, 'day');
 
     useEffect(() => {
         dispatchStore(getTechnology())
     }, [])
+
+    useEffect(() => {
+        if (errorMessage) {
+            showErrorMessage(errorMessage)
+        }
+    }, [errorMessage])
 
     const { technologyList } = useSelector((state: any) => state.slotData)
 
