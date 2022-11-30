@@ -51,10 +51,18 @@ const EditRow = ({ rowsData, handleEditFormSubmit, handleCancelClick }) => {
 
     const handleEndTime = (newValue) => {
         setEndTime(newValue)
+        // if (date && startTime) {
+        //     dispatchStore(validateTime({ date: dayjs(date).format('YYYY-MM-DD'), startTime: startTime, endTime: endTime }))
+        // }
+    }
+
+    useEffect(() => {
         if (date && startTime) {
+            console.log("start time : ", dayjs(startTime).format('hh:mm A'))
+            console.log("end time : ", dayjs(endTime).format('hh:mm A'))
             dispatchStore(validateTime({ date: dayjs(date).format('YYYY-MM-DD'), startTime: startTime, endTime: endTime }))
         }
-    }
+    }, [endTime])
 
     function getStyles(name, personName, theme) {
         return {
