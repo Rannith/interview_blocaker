@@ -38,19 +38,37 @@ export const getErrorMessage = (message) => ({
     payload: message
 })
 
-export const getUserSlot = () => (
+export const technology = (value) => ({
+    type: types.GET_TECHNOLOGY,
+    payload: value
+})
+
+// export const getUserSlot = () => (
+//     dispatch: Dispatch<any>
+// ) => {
+//     console.log("hi hi");
+//     axios.get("http://localhost:8080/booking")
+//         .then((res) => {
+//             if (res.status === 200) {
+//                 dispatch(mySlots(res.data));
+//                 console.log("Action all slot: ", res.data);
+//             }
+//         })
+//         .catch((error) => {
+//             console.log("Error in all slot dispatch: ", error.response.data.error);
+//         })
+// }
+
+export const getTechnology = () => (
     dispatch: Dispatch<any>
 ) => {
-    console.log("hi hi");
-    axios.get("http://localhost:8080/booking")
+    axios.get(`http://localhost:8080/api/v1/booking/technology`)
         .then((res) => {
-            if (res.status === 200) {
-                dispatch(mySlots(res.data));
-                console.log("Action all slot: ", res.data);
-            }
+            // console.log(res.data.results)
+            dispatch(technology(res.data.results))
         })
         .catch((error) => {
-            console.log("Error in all slot dispatch: ", error.response.data.error);
+            console.log("Error in technology dispatch : ", error)
         })
 }
 
@@ -58,10 +76,13 @@ export const addSlot = (values: any) => (
     dispatch: Dispatch<any>
 ) => {
     console.log("bye bye", values);
-    
-    axios.post("http://localhost:8080/booking", values)
+
+    const userId = "637ba72983e8e55819414ff9"
+
+    axios.post(`http://localhost:8080/api/v1/booking/${userId}`, values)
         .then((res) => {
-            dispatch(addSlotSuccess(res.data));
+            dispatch(addSlotSuccess(res.data.message));
+            dispatch(getUserSlot(123))
             console.log("Action add slot: ", res.data);
         })
         .catch((error) => {
@@ -73,10 +94,11 @@ export const editSlot = (id: any, values: InputFieldSlot) => (
     dispatch: Dispatch<any>
 ) => {
     console.log("Edit slot id : ", id)
-    axios.put(`http://localhost:8080/booking/${id}`, values)
+    axios.put(`http://localhost:8080/api/v1/booking/${id}`, values)
         .then((res) => {
             dispatch(editSlotSuccess(res.data))
             dispatch(getSuccessMessage(`Slot ID: ${id}, updated successfully`))
+            dispatch(getUserSlot(123))
             console.log("Response from edit slot", res.data);
         })
         .catch((error) => {
@@ -90,13 +112,14 @@ export const deleteSlot = (id: any) => (
 ) => {
     console.log("DELETE ID : ", id);
 
-    axios.delete(`http://localhost:8080/booking/${id}`, id)
+    axios.delete(`http://localhost:8080/api/v1/booking/${id}`)
         .then((res) => {
             if (res.status === 200) {
                 dispatch(deleteSlotSuccess(res.data))
                 dispatch(getSuccessMessage(`Slot ID: ${id}, deleted successfully`))
+                dispatch(getUserSlot(123))
                 console.log("delete response : ", res.data)
-                console.log("res.status", res.status); 
+                console.log("res.status", res.status);
             }
         })
         .catch((error) => {
@@ -105,17 +128,33 @@ export const deleteSlot = (id: any) => (
         })
 }
 
-// export const getUserSlot = (id: any) => (
-//     dispatch: Dispatch<any>
-// ) => {
-//     axios.get(`http://localhost:8080/booking/${id}`, id)
-//         .then((res) => {
-//             if (res.status === 200) {
-//                 dispatch(mySlots(res.data));
-//                 console.log("Action all slot: ", res.data);
-//             }
-//         })
-//         .catch((error) => {
-//             console.log("Error in all slot dispatch: ", error.response.data.error);
-//         })
-// }
+export const getUserSlot = (id: any) => (
+    dispatch: Dispatch<any>
+) => {
+    const userId = "637ba72983e8e55819414ff9"
+
+    axios.get(`http://localhost:8080/api/v1/booking/slots/1/${userId}`)
+        .then((res) => {
+            if (res.status === 200) {
+                dispatch(mySlots(res.data.results));
+                // console.log("Action all slot: ", res.data);
+            }
+        })
+        .catch((error) => {
+            console.log("Error in all slot dispatch: ", error.response.data.error);
+        })
+}
+
+export const validateTime = (value) => (
+    dispatch: Dispatch<any>
+) => {
+    axios.post(`http://localhost:8080/api/v1/timeValidator`, value)
+        .then((res) => {
+            // console.log(res.data)
+            dispatch(getSuccessMessage(res.data.message))
+        })
+        .catch((error) => {
+            console.log("Error in validate time dispatch : ", error.response.data)
+            dispatch(getErrorMessage(error.response.data.message))
+        })
+}

@@ -8,17 +8,22 @@ import EditRow from "./tableRow/EditRow";
 import TableRows from "./TableRows";
 import { store } from "../store";
 import { addSlot, deleteSlot, getUserSlot } from "../action/action";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 // import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 const New = () => {
 
-    const [values, setValues] = useState<any>(data);
+    const [values, setValues] = useState<any>();
     const [rowsData, setRowsData] = useState<any>([]);
+    const [tableValues, setTableValues] = useState([])
+    const [success, setSuccess] = useState(false)
 
     const [editData, setEditData] = useState<InputFieldSlot>(initialStateSlot);
     const [editId, setEditId] = useState(null);
 
     const dispatchStore = store.dispatch as typeof store.dispatch | Dispatch<any>;
+    const navigate = useNavigate()
 
     const addTableRows = () => {
         console.log("add");
@@ -26,12 +31,12 @@ const New = () => {
         // const rowsInput = dispatchStore(addSlot)
         const rowsInput = { initialStateSlot }
         setRowsData([...rowsData, rowsInput])
-
+        setSuccess(true)
     }
 
-    // useEffect(() => {
-    //     dispatchStore(getUserSlot())
-    // })
+    useEffect(() => {
+        // dispatchStore(getUserSlot())
+    })
 
     const handleChange = (index, e) => {
         if (index === "technology") {
@@ -55,7 +60,9 @@ const New = () => {
         delete rowsData[0].initialStateSlot;
         console.log("roww data : ", rowsData[0]);
 
+        alert("Slot booked successfully!")
         dispatchStore(addSlot(rowsData[0]));
+
 
     }
 
@@ -79,13 +86,13 @@ const New = () => {
             endTime: editData.endTime
         };
 
-        const newvalues = [...values];
+        // const newvalues = [...values];
 
-        const index = values.findIndex((value) => value.id === editId);
+        // const index = values.findIndex((value) => value.id === editId);
 
-        newvalues[index] = editedvalue;
+        // newvalues[index] = editedvalue;
 
-        setValues(newvalues);
+        // setValues(newvalues);
         setEditId(null);
     };
 
@@ -108,16 +115,18 @@ const New = () => {
         console.log("cancel");
 
         setEditId(null);
+
+        setRowsData(null);
     };
 
     const handleDeleteClick = (valueId) => {
         console.log("delete");
 
-        const newvalues = [...values];
-        dispatchStore(deleteSlot(valueId))
+        // const newvalues = [...values];
+        // dispatchStore(deleteSlot(valueId))
 
 
-        setValues(newvalues);
+        // setValues(newvalues);
 
         // const newvalues = [...values];
 
@@ -131,11 +140,9 @@ const New = () => {
 
     return (
         <>
-            <button onClick={addTableRows} >ADD ROW</button>
+            <button onClick={addTableRows} className="submitButton">ADD ROW</button>
             <br /><br />
             <div className="app-container">
-                {/* <div className="row">
-                    <div className="col-sm-8"> */}
                 <form onSubmit={handleEditFormSubmit}>
                     <table>
                         <thead>
@@ -149,23 +156,22 @@ const New = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {values && values.map((value) => (
+                            {/* {rowsData && rowsData.map((value) => (
                                 <>
                                     {editId === value.id ? (
-                                        <EditRow editData={editData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} />
+                                        <EditRow editData={editData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} />  //ok
                                     ) : (
-                                        <ReadRow value={value} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick} />
+                                        <ReadRow value={value} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick} />  //ok
                                     )}
                                 </>
                             ))}
+                            {
+                                tableValues.length ? tableValues.length ===0 ? <h5>No slots booked</h5>:<TableRows rowsData={rowsData} handleChange={handleChange} handleAdd={handleAdd} handleCancelClick={handleCancelClick} />:<h3>Loading</h3>
+                            } */}
                             <TableRows rowsData={rowsData} handleChange={handleChange} handleAdd={handleAdd} handleCancelClick={handleCancelClick} />
                         </tbody>
                     </table>
                 </form>
-                {/* </div>
-                    <div className="col-sm-4">
-                    </div> */}
-                {/* </div> */}
             </div>
         </>
     )

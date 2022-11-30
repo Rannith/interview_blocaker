@@ -14,9 +14,11 @@ const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => 
     const [technologyArray, setTech] = useState([])
 
     const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
+        { value: 'React Js', label: 'React Js' },
+        { value: 'Node Js', label: 'Node Js' },
+        { value: 'Vue Js', label: 'Vue Js' },
+        { value: 'Magento', label: 'Magneto' },
+        { value: 'php', label: 'php' },
     ]
     const animatedComponents = makeAnimated();
 
@@ -69,7 +71,7 @@ const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => 
                 let { meetingName, technology, date, startTime, endTime } = data;
                 return (
                     <tr key={index}>
-                        <td><input type="text" value={meetingName} onChange={(evnt) => (handleChange(index, evnt))} name="meetingName" className="form-control" /> </td>
+                        <td><input type="text" value={meetingName} onChange={(e) => (handleChange(index, e))} name="meetingName" className="form-control" /> </td>
                         <td>
                             <Select
                                 multiple
@@ -97,10 +99,10 @@ const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => 
                             </Select>
 
                         </td>
-                        {/* <td><input type="text" value={technology} onChange={(evnt) => (handleChange(index, evnt))} name="technology" className="form-control" /> </td> */}
-                        <td><input type="text" value={date} onChange={(evnt) => (handleChange(index, evnt))} name="date" className="form-control" /> </td>
-                        <td><input type="text" value={startTime} onChange={(evnt) => (handleChange(index, evnt))} name="startTime" className="form-control" /></td>
-                        <td><input type="text" value={endTime} onChange={(evnt) => (handleChange(index, evnt))} name="endTime" className="form-control" /> </td>
+                        {/* <td><input type="text" value={technology} onChange={(e) => (handleChange(index, e))} name="technology" className="form-control" /> </td> */}
+                        <td><input type="text" value={date} onChange={(e) => (handleChange(index, e))} name="date" className="form-control" /> </td>
+                        <td><input type="text" value={startTime} onChange={(e) => (handleChange(index, e))} name="startTime" className="form-control" /></td>
+                        <td><input type="text" value={endTime} onChange={(e) => (handleChange(index, e))} name="endTime" className="form-control" /> </td>
                         <td>
                             <button type="submit" onClick={handleAdd}>Save</button>
                             <button type="button" onClick={handleCancelClick}>Cancel</button>

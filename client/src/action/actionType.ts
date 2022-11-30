@@ -1,4 +1,5 @@
 export const LOGIN_USER = "LOGIN_USER";
+export const GET_TECHNOLOGY = "GET_TECHNOLOGY"
 
 export const ADD_SLOT = "ADD_SLOT";
 export const EDIT_SLOT = "EDIT_SLOT";

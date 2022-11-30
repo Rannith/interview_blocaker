@@ -30,6 +30,14 @@ interface InputFieldSlot {
     endTime?: string
 }
 
+interface InputFieldError {
+    meetingNameError?: string,
+    technologyError?: string,
+    dateError?: string,
+    startTimeError?: string,
+    endTimeError?: string
+}
+
 interface InitialLoginAction {
     type: string,
     payload: InputFieldUser[]
@@ -63,6 +71,7 @@ interface UserState {
 interface SlotState {
     slots?: Array<InputFieldSlot>;
     slot?: InputFieldSlot;
+    technologyList?: any;
     successMessage?: any;
     errorMessage?: any;
 }

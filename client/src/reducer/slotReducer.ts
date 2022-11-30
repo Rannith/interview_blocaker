@@ -11,6 +11,7 @@ const initialState: SlotState = {
         startTime: '',
         endTime: '',
     },
+    technologyList: [],
     successMessage: '',
     errorMessage: ''
 }
@@ -45,6 +46,11 @@ const slotReducer = (state: SlotState = initialState, action: SlotActionsTypes):
                 slot: action.payload,
                 successMessage: action.payload,
                 errorMessage: ""
+            }
+        case types.GET_TECHNOLOGY:
+            return {
+                ...state,
+                technologyList: action.payload
             }
         case types.GET_SUCCESS_MESSAGE:
             return {

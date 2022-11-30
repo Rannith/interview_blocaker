@@ -12,3 +12,11 @@ export const initialStateSlot = {
     startTime: '',
     endTime: ''
 }
+
+export const initialStateSlotError = {
+    meetingNameError: '',
+    technologyError: '',
+    dateError: '',
+    startTimeError: '',
+    endTimeError: ''
+}
