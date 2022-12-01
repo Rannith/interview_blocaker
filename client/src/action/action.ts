@@ -72,7 +72,7 @@ export const getTechnology = () => (
         })
 }
 
-export const addSlot = (values: any) => (
+export const addSlot = (values: any, week) => (
     dispatch: Dispatch<any>
 ) => {
     console.log("bye bye", values);
@@ -82,7 +82,7 @@ export const addSlot = (values: any) => (
     axios.post(`http://localhost:8080/api/v1/booking/${userId}`, values)
         .then((res) => {
             dispatch(addSlotSuccess(res.data.message));
-            dispatch(getUserSlot(123))  // all user
+            dispatch(getUserSlot(123, week))  // all user
             dispatch(getSuccessMessage(res.data.message))
             console.log("Action add slot: ", res.data);
         })
@@ -91,7 +91,7 @@ export const addSlot = (values: any) => (
         })
 }
 
-export const editSlot = (id: any, values: InputFieldSlot) => (
+export const editSlot = (id: any, values: InputFieldSlot, week:number) => (
     dispatch: Dispatch<any>
 ) => {
     console.log("Edit slot id : ", id)
@@ -99,7 +99,7 @@ export const editSlot = (id: any, values: InputFieldSlot) => (
         .then((res) => {
             dispatch(editSlotSuccess(res.data))
             // dispatch(getSuccessMessage(`Slot ID: ${id}, updated successfully`))
-            dispatch(getUserSlot(123))
+            dispatch(getUserSlot(123, week))
             console.log("Response from edit slot", res.data);
         })
         .catch((error) => {
@@ -108,7 +108,7 @@ export const editSlot = (id: any, values: InputFieldSlot) => (
         })
 }
 
-export const deleteSlot = (id: any) => (
+export const deleteSlot = (id: any, week: number) => (
     dispatch: Dispatch<any>
 ) => {
     console.log("DELETE ID : ", id);
@@ -118,7 +118,7 @@ export const deleteSlot = (id: any) => (
             if (res.status === 200) {
                 dispatch(deleteSlotSuccess(res.data))
                 // dispatch(getSuccessMessage(`Slot ID: ${id}, deleted successfully`))
-                dispatch(getUserSlot(123))
+                dispatch(getUserSlot(123, week))
                 console.log("delete response : ", res.data)
                 console.log("res.status", res.status);
             }
@@ -129,12 +129,12 @@ export const deleteSlot = (id: any) => (
         })
 }
 
-export const getUserSlot = (id: any) => (
+export const getUserSlot = (id: any, week: number) => (
     dispatch: Dispatch<any>
 ) => {
     const userId = "637ba72983e8e55819414ff9"
 
-    axios.get(`http://localhost:8080/api/v1/booking/slots/2/${userId}`)
+    axios.get(`http://localhost:8080/api/v1/booking/slots/${week}/${userId}`)
         .then((res) => {
             if (res.status === 200) {
                 console.log(res.data.results);

@@ -8,11 +8,14 @@ import EditRow from "../tableRow/EditRow";
 import ReadRow from "../tableRow/ReadRow";
 import dayjs from 'dayjs';
 import showSuccessMessage, { showErrorMessage } from "../../shared/utils/alertMessage";
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 
 const Table = () => {
 
     const [rowsData, setRowsData] = useState<any>([]);
     const [error, setError] = useState<any>(false);
+    const [toggle, setToggle] = useState<number>(1);
 
     const [editData, setEditData] = useState<any>([]);
     const [editId, setEditId] = useState(null);
@@ -21,11 +24,11 @@ const Table = () => {
 
     const { slots } = useSelector((state: any) => state.slotData)
     const { successMessage } = useSelector((state: any) => state.slotData)
-    console.log("success msg FE", successMessage);    
+    console.log("success msg FE", successMessage);
 
     useEffect(() => {
-        dispatchStore(getUserSlot(123))
-    }, [])
+        dispatchStore(getUserSlot(123, toggle))
+    }, [toggle])
 
     console.log("all slots : ", slots)
 
@@ -34,7 +37,7 @@ const Table = () => {
 
         if (!rowsData[0].meetingName || !rowsData[0].technology || !rowsData[0].date || !rowsData[0].startTime || !rowsData[0].endTime) {
             error = showErrorMessage("Please fill all the fields");
-        } 
+        }
 
         return error
     }
@@ -45,7 +48,7 @@ const Table = () => {
 
         if (!editedValue.meetingName || !editedValue.technology || !editedValue.date || !editedValue.startTime || !editedValue.endTime) {
             error = showErrorMessage("Please fill all the fields");
-        } 
+        }
 
         return error
     }
@@ -82,10 +85,10 @@ const Table = () => {
         console.log("--Add--");
         e.preventDefault();
         // delete rowsData[0].initialStateSlot;
-        
+
         const validation = validate(rowsData);
         if (validation) {
-            dispatchStore(addSlot(rowsData[0]));
+            dispatchStore(addSlot(rowsData[0], toggle));
             // showSuccessMessage(successMessage)
             showSuccessMessage("Successfully slot has been booked");
             setRowsData(rowsData.splice(0, -1));
@@ -93,7 +96,7 @@ const Table = () => {
     }
 
     const handleDelete = (id: string) => {
-        dispatchStore(deleteSlot(id));
+        dispatchStore(deleteSlot(id, toggle));
         showSuccessMessage("Successfully slot has been deleted");
     }
 
@@ -122,7 +125,7 @@ const Table = () => {
         console.log("edited value ==>> ", editedValue)
         const validation = validateEdit(editedValue);
         if (validation) {
-            dispatchStore(editSlot(editId, editedValue));
+            dispatchStore(editSlot(editId, editedValue, toggle));
             showSuccessMessage("Slot has been edited");
             setEditId(null);
         }
@@ -131,7 +134,11 @@ const Table = () => {
     return (
 
         <>
-            <button className="submitButton" onClick={addTableRows}>ADD</button>
+            {
+                toggle === 1 ?
+                    (<h1 className="tableHeading" ><div>Current Week</div> <strong onClick={(e) => setToggle(2)} ><ArrowCircleRightIcon fontSize="medium" /></strong></h1>) :
+                    (<h1 className="tableHeading"><div>Next Week</div> <strong onClick={(e) => setToggle(1)} ><ArrowCircleLeftIcon fontSize="medium" /></strong></h1>)
+            }
             <div className="app-container">
                 <div className="row">
                     <div className="col-sm-8">
@@ -160,6 +167,9 @@ const Table = () => {
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div className="buttonContainer">
+                    <button className="submitButton" onClick={addTableRows}>ADD</button>
                 </div>
             </div>
         </>
