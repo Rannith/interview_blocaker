@@ -23,7 +23,7 @@ const slotReducer = (state: SlotState = initialState, action: SlotActionsTypes):
             return {
                 ...state,
                 slots: action.payload,
-                successMessage: action.payload,
+                // successMessage: action.payload,
                 errorMessage: ""
             }
         case types.ADD_SLOT:

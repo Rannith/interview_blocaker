@@ -1,10 +1,9 @@
 import React, { Dispatch, useEffect, useState } from 'react';
-import "../Table.css";
+import "../table/index.css";
 import dayjs from 'dayjs';
 import { Box, Chip, MenuItem, OutlinedInput, Select, TextField, useTheme } from '@mui/material';
 import { LocalizationProvider, DesktopDatePicker, TimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { MenuProps } from 'react-select';
 import { useSelector } from 'react-redux';
 import { validateTime } from '../../action/action';
 import { store } from '../../store';
@@ -48,14 +47,10 @@ const EditRow = ({ rowsData, handleEditFormSubmit, handleCancelClick }) => {
             // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
         );
-        // handleChange("technology", event)
     };
 
     const handleEndTime = (newValue) => {
         setEndTime(newValue)
-        // if (date && startTime) {
-        //     dispatchStore(validateTime({ date: dayjs(date).format('YYYY-MM-DD'), startTime: startTime, endTime: endTime }))
-        // }
     }
 
     useEffect(() => {
@@ -84,7 +79,6 @@ const EditRow = ({ rowsData, handleEditFormSubmit, handleCancelClick }) => {
     return (
         <tr>
             <td>
-                {/* <input type="text" name="meetingName" placeholder="Enter the meeting name" value={meetingName} onChange={(e) => setMeetingName(e.target.value)} /> */}
                 <TextField value={meetingName} onChange={(e) => setMeetingName(e.target.value)} />
             </td>
             <td>
@@ -114,19 +108,18 @@ const EditRow = ({ rowsData, handleEditFormSubmit, handleCancelClick }) => {
                 </Select>
 
             </td>
-            {/* <td>
-                <input type="text" name="technology" placeholder="Choose the technology name" value={editData.technology} onChange={handleEditFormChange} />
-            </td> */}
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <td><DesktopDatePicker
-                    label="Date"
-                    inputFormat="MM/DD/YYYY"
-                    value={date}
-                    onChange={(newValue) => setDate(newValue)}
-                    renderInput={(params) => <TextField {...params} />}
-                    minDate={min}
-                    maxDate={max}
-                /></td>
+                <td>
+                    <DesktopDatePicker
+                        label="Date"
+                        inputFormat="MM/DD/YYYY"
+                        value={date}
+                        onChange={(newValue) => setDate(newValue)}
+                        renderInput={(params) => <TextField {...params} />}
+                        minDate={min}
+                        maxDate={max}
+                    />
+                </td>
                 <td>
                     {
                         dayjs(date).format('YYYY-MM-DD') === dayjs().format('YYYY-MM-DD') ?
@@ -166,15 +159,6 @@ const EditRow = ({ rowsData, handleEditFormSubmit, handleCancelClick }) => {
                     }
                 </td>
             </LocalizationProvider>
-            {/* <td>
-                <input type="text" name="date" placeholder="Enter the meeting date" value={dayjs(rowsData.date).format('DD/MM/YYYY')} onChange={handleEditFormChange} />
-            </td>
-            <td>
-                <input type="text" name="startTime" placeholder="Enter the meeting start time" value={dayjs(rowsData.startTime).format('hh:mm A')} onChange={handleEditFormChange} />
-            </td>
-            <td>
-                <input type="text" name="endTime" placeholder="Enter the meeting end time" value={dayjs(rowsData.endTime).format('hh:mm A')} onChange={handleEditFormChange} />
-            </td> */}
             <td>
                 <button type="submit" onClick={() => handleEditFormSubmit({ meetingName, technology, date, startTime, endTime })} >Save Edit</button>
                 <button type="button" onClick={handleCancelClick}>Cancel</button>

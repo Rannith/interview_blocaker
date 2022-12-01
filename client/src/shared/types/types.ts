@@ -1,8 +1,8 @@
-export const initialStateUser = {
-    userName: '',
-    email: '',
-    aceNo: ''
-}
+// export const initialStateUser = {
+//     userName: '',
+//     email: '',
+//     aceNo: ''
+// }
 
 export const initialStateSlot = {
     id:'',

@@ -1,16 +1,16 @@
 import { IconButtonProps, TableProps } from "@mui/material"
 
-interface InputField {
-    userName?: string,
-    email?: string,
-    aceNo?: string,
-    heading?: string,
-    userId?: number,
-    date?: Date,
-    technology?: string[],
-    startTime?: string,
-    endTime?: string,
-}
+// interface InputField {
+//     userName?: string,
+//     email?: string,
+//     aceNo?: string,
+//     heading?: string,
+//     userId?: number,
+//     date?: Date,
+//     technology?: string[],
+//     startTime?: string,
+//     endTime?: string,
+// }
 
 interface InputFieldUser {
     id?: number;
@@ -23,7 +23,7 @@ interface InputFieldSlot {
     userId?: number,
     meetingName?: string,
     technology?: any,
-    date?: any
+    date?: any,
     // technology?: string[],
     // date?: Date,
     startTime?: string,
@@ -58,7 +58,6 @@ interface InitialSingleSlotAction {
     payload: InputFieldSlot
 }
 
-
 interface UserState {
     users?: Array<InputFieldUser>;
     user?: InputFieldUser;
@@ -82,22 +81,22 @@ export type SlotActionsTypes = InitialSlotAction & InitialSingleSlotAction
 
 // For Table Component
 
-interface ColumnProps {
-    title: string,
-    key: string
-}
+// interface ColumnProps {
+//     title: string,
+//     key: string
+// }
 
-interface RowProps {
-    key?: string,
-    userName: string,
-    email?: string,
-    aceNo?: string,
-    id?: string,
-    actionButtons?: IconButtonProps[],
-    selector?: any
-}
+// interface RowProps {
+//     key?: string,
+//     userName: string,
+//     email?: string,
+//     aceNo?: string,
+//     id?: string,
+//     actionButtons?: IconButtonProps[],
+//     selector?: any
+// }
 
-interface MUITableProps extends TableProps {
-    rows?: RowProps[],
-    columns: ColumnProps[]
-}
+// interface MUITableProps extends TableProps {
+//     rows?: RowProps[],
+//     columns: ColumnProps[]
+// }

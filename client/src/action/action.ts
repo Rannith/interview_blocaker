@@ -82,7 +82,8 @@ export const addSlot = (values: any) => (
     axios.post(`http://localhost:8080/api/v1/booking/${userId}`, values)
         .then((res) => {
             dispatch(addSlotSuccess(res.data.message));
-            dispatch(getUserSlot(123))
+            dispatch(getUserSlot(123))  // all user
+            dispatch(getSuccessMessage(res.data.message))
             console.log("Action add slot: ", res.data);
         })
         .catch((error) => {
@@ -97,7 +98,7 @@ export const editSlot = (id: any, values: InputFieldSlot) => (
     axios.put(`http://localhost:8080/api/v1/booking/${id}`, values)
         .then((res) => {
             dispatch(editSlotSuccess(res.data))
-            dispatch(getSuccessMessage(`Slot ID: ${id}, updated successfully`))
+            // dispatch(getSuccessMessage(`Slot ID: ${id}, updated successfully`))
             dispatch(getUserSlot(123))
             console.log("Response from edit slot", res.data);
         })
@@ -116,7 +117,7 @@ export const deleteSlot = (id: any) => (
         .then((res) => {
             if (res.status === 200) {
                 dispatch(deleteSlotSuccess(res.data))
-                dispatch(getSuccessMessage(`Slot ID: ${id}, deleted successfully`))
+                // dispatch(getSuccessMessage(`Slot ID: ${id}, deleted successfully`))
                 dispatch(getUserSlot(123))
                 console.log("delete response : ", res.data)
                 console.log("res.status", res.status);
@@ -133,10 +134,13 @@ export const getUserSlot = (id: any) => (
 ) => {
     const userId = "637ba72983e8e55819414ff9"
 
-    axios.get(`http://localhost:8080/api/v1/booking/slots/1/${userId}`)
+    axios.get(`http://localhost:8080/api/v1/booking/slots/2/${userId}`)
         .then((res) => {
             if (res.status === 200) {
+                console.log(res.data.results);
+                
                 dispatch(mySlots(res.data.results));
+                dispatch(getSuccessMessage(res.data.message))
                 // console.log("Action all slot: ", res.data);
             }
         })
