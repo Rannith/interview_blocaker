@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { validateTime } from '../../action/action';
 import { store } from '../../store';
 import { showErrorMessage } from '../../shared/utils/alertMessage';
+import { MenuProps, getStyles } from '../../shared/utils/multiSelector'
 
 const EditRow = ({ rowsData, handleEditFormSubmit, handleCancelClick }) => {
 
@@ -24,18 +25,6 @@ const EditRow = ({ rowsData, handleEditFormSubmit, handleCancelClick }) => {
     const [date, setDate] = useState(rowsData.date)
     const [startTime, setStartTime] = useState(rowsData.startTime)
     const [endTime, setEndTime] = useState(rowsData.endTime)
-
-    const ITEM_HEIGHT = 48;
-    const ITEM_PADDING_TOP = 8;
-
-    const MenuProps = {
-        PaperProps: {
-            style: {
-                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-                width: 250,
-            },
-        },
-    };
 
     const theme = useTheme();
 
@@ -66,15 +55,6 @@ const EditRow = ({ rowsData, handleEditFormSubmit, handleCancelClick }) => {
             showErrorMessage(errorMessage)
         }
     }, [errorMessage])
-
-    function getStyles(name, personName, theme) {
-        return {
-            fontWeight:
-                personName.indexOf(name) === -1
-                    ? theme.typography.fontWeightRegular
-                    : theme.typography.fontWeightMedium,
-        };
-    }
 
     return (
         <tr>

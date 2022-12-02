@@ -14,6 +14,7 @@ import { store } from "../../store";
 import { getTechnology } from '../../action/action';
 import { useSelector } from "react-redux";
 import { showErrorMessage } from "../../shared/utils/alertMessage";
+import { MenuProps, getStyles } from '../../shared/utils/multiSelector'
 
 const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => {
 
@@ -36,18 +37,6 @@ const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => 
 
     const { technologyList } = useSelector((state: any) => state.slotData)
 
-    const ITEM_HEIGHT = 48;
-    const ITEM_PADDING_TOP = 8;
-
-    const MenuProps = {
-        PaperProps: {
-            style: {
-                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-                width: 250,
-            },
-        },
-    };
-
     const theme = useTheme();
 
     const handleChangess = (event) => {
@@ -60,15 +49,6 @@ const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => 
         );
         handleChange("technology", event)
     };
-
-    function getStyles(name, personName, theme) {
-        return {
-            fontWeight:
-                personName.indexOf(name) === -1
-                    ? theme.typography.fontWeightRegular
-                    : theme.typography.fontWeightMedium,
-        };
-    }
 
     return (
 

@@ -24,13 +24,16 @@ const Table = () => {
 
     const { slots } = useSelector((state: any) => state.slotData)
     const { successMessage } = useSelector((state: any) => state.slotData)
-    console.log("success msg FE", successMessage);
 
     useEffect(() => {
         dispatchStore(getUserSlot(123, toggle))
     }, [toggle])
 
-    console.log("all slots : ", slots)
+    useEffect(() => {
+        if (successMessage) {
+            showSuccessMessage(successMessage)
+        }
+    }, [successMessage])
 
     const validate = (rowsData) => {
         let error: any = (initialStateSlotError)
@@ -73,10 +76,8 @@ const Table = () => {
                 if (rowsData[0].date && rowsData[0].startTime) {
                     dispatchStore(validateTime({ date: dayjs(rowsData[0].date).format('YYYY-MM-DD'), startTime: rowsData[0].startTime, endTime: rowsData[0].endTime }))
                 }
-                // dispatchStore(validateTime({date: }))
             }
         }
-        // setError(() => validate(rowsData))
     }
 
     console.log("edit data after edit : ", editData)
@@ -84,20 +85,16 @@ const Table = () => {
     const handleAdd = (e: React.MouseEvent) => {
         console.log("--Add--");
         e.preventDefault();
-        // delete rowsData[0].initialStateSlot;
 
         const validation = validate(rowsData);
         if (validation) {
             dispatchStore(addSlot(rowsData[0], toggle));
-            // showSuccessMessage(successMessage)
-            showSuccessMessage("Successfully slot has been booked");
             setRowsData(rowsData.splice(0, -1));
         }
     }
 
     const handleDelete = (id: string) => {
         dispatchStore(deleteSlot(id, toggle));
-        showSuccessMessage("Successfully slot has been deleted");
     }
 
     const handleCancelClick = (index) => {
@@ -126,7 +123,7 @@ const Table = () => {
         const validation = validateEdit(editedValue);
         if (validation) {
             dispatchStore(editSlot(editId, editedValue, toggle));
-            showSuccessMessage("Slot has been edited");
+            // showSuccessMessage("Slot has been edited");
             setEditId(null);
         }
     };

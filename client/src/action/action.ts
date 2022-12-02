@@ -98,6 +98,7 @@ export const editSlot = (id: any, values: InputFieldSlot, week:number) => (
     axios.put(`http://localhost:8080/api/v1/booking/${id}`, values)
         .then((res) => {
             dispatch(editSlotSuccess(res.data))
+            dispatch(getSuccessMessage(res.data.message))
             // dispatch(getSuccessMessage(`Slot ID: ${id}, updated successfully`))
             dispatch(getUserSlot(123, week))
             console.log("Response from edit slot", res.data);
@@ -117,6 +118,7 @@ export const deleteSlot = (id: any, week: number) => (
         .then((res) => {
             if (res.status === 200) {
                 dispatch(deleteSlotSuccess(res.data))
+                dispatch(getSuccessMessage(res.data.message))
                 // dispatch(getSuccessMessage(`Slot ID: ${id}, deleted successfully`))
                 dispatch(getUserSlot(123, week))
                 console.log("delete response : ", res.data)
@@ -140,7 +142,7 @@ export const getUserSlot = (id: any, week: number) => (
                 console.log(res.data.results);
                 
                 dispatch(mySlots(res.data.results));
-                dispatch(getSuccessMessage(res.data.message))
+                // dispatch(getSuccessMessage(res.data.message))
                 // console.log("Action all slot: ", res.data);
             }
         })
