@@ -15,6 +15,7 @@ import { getTechnology } from '../../action/action';
 import { useSelector } from "react-redux";
 import { showErrorMessage } from "../../shared/utils/alertMessage";
 import { MenuProps, getStyles } from '../../shared/utils/multiSelector'
+import Button from '@mui/material/Button';
 
 const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => {
 
@@ -141,8 +142,12 @@ const TableRows = ({ rowsData, handleChange, handleAdd, handleCancelClick }) => 
                             </td>
                         </LocalizationProvider>
                         <td>
-                            <button type="submit" onClick={handleAdd}>Save</button>
-                            <button type="button" onClick={handleCancelClick}>Cancel</button>
+                            <div className='action-button-container' >
+                                <Button color='inherit' variant='contained' onClick={handleAdd}>Save</Button>
+                                <Button color='inherit' variant='contained' onClick={handleCancelClick}>Cancel</Button>
+                            </div>
+                            {/* <button type="submit" onClick={handleAdd}>Save</button>
+                            <button type="button" onClick={handleCancelClick}>Cancel</button> */}
                         </td>
                     </tr>
                 )

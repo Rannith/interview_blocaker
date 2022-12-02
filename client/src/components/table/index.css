@@ -68,3 +68,9 @@ form * {
     text-align: right;
     display: block;
 }
+
+.action-button-container {
+    display: grid;   
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+}

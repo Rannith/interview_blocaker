@@ -9,6 +9,7 @@ import { validateTime } from '../../action/action';
 import { store } from '../../store';
 import { showErrorMessage } from '../../shared/utils/alertMessage';
 import { MenuProps, getStyles } from '../../shared/utils/multiSelector'
+import Button from '@mui/material/Button';
 
 const EditRow = ({ rowsData, handleEditFormSubmit, handleCancelClick }) => {
 
@@ -140,8 +141,12 @@ const EditRow = ({ rowsData, handleEditFormSubmit, handleCancelClick }) => {
                 </td>
             </LocalizationProvider>
             <td>
-                <button type="submit" onClick={() => handleEditFormSubmit({ meetingName, technology, date, startTime, endTime })} >Save Edit</button>
-                <button type="button" onClick={handleCancelClick}>Cancel</button>
+                <div className='action-button-container' >
+                    <Button color='inherit' variant='contained' onClick={() => handleEditFormSubmit({ meetingName, technology, date, startTime, endTime })}>Save Edit</Button>
+                    <Button color='inherit' variant='contained' onClick={handleCancelClick}>Cancel</Button>
+                </div>
+                {/* <button type="submit" onClick={() => handleEditFormSubmit({ meetingName, technology, date, startTime, endTime })} >Save Edit</button>
+                <button type="button" onClick={handleCancelClick}>Cancel</button> */}
             </td>
         </tr>
     );

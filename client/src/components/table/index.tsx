@@ -94,7 +94,9 @@ const Table = () => {
     }
 
     const handleDelete = (id: string) => {
-        dispatchStore(deleteSlot(id, toggle));
+        if (window.confirm('Are you sure you want to delete the booked slot?')) {
+            dispatchStore(deleteSlot(id, toggle));
+        }
     }
 
     const handleCancelClick = (index) => {
