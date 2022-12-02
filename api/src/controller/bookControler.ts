@@ -17,11 +17,10 @@ class BookController {
             const { userId } = req.params
             const saveBooking = await this.bookService.saveBooking(meetingName, date, startTime, endTime, technology, userId)
 
-            return res.status(201).json(this.responseWrapper.success("Slot Booked Successfully", saveBooking, res.statusCode))
+            return res.status(201).json(this.responseWrapper.success(`${saveBooking.meetingName} Booked Successfully`, saveBooking, res.statusCode))
         }
         catch (err) {
             next(err)
-            // return res.status(500).json(this.responseWrapper.error(err, res.statusCode))
         }
     }
 
@@ -33,7 +32,6 @@ class BookController {
         }
         catch (err) {
             next(err)
-            // return res.status(500).json(this.responseWrapper.error(err, res.statusCode))
         }
     }
 
@@ -52,15 +50,10 @@ class BookController {
         try {
             const deleteBooking = await this.bookService.deleteBooking(req.params.bookingId)
 
-            return res.status(200).json(this.responseWrapper.success(`deleted Successfully`, deleteBooking, res.statusCode))
+            return res.status(200).json(this.responseWrapper.success(`${deleteBooking?.meetingName} deleted Successfully`, deleteBooking, res.statusCode))
         }
         catch (err) {
             next(err)
-            // if(err.status) {
-            //     res.status(err.status).json(this.responseWrapper.error(err.message, err.status))
-            // }else {
-            //     res.status(500).json(this.responseWrapper.error(err, res.statusCode))
-            // }
         }
     }
 
@@ -72,7 +65,6 @@ class BookController {
         }
         catch (err) {
             next(err)
-            // return res.status(500).json(this.responseWrapper.error(err, res.statusCode))
         }
     }
 }
