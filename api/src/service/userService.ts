@@ -1,7 +1,8 @@
 import UserRepository from '../repository/userRepository';
-import User from '../model/user'
+import User from '../model/user';
 
 class UserService {
+    
     userRepository: UserRepository
     constructor() {
         this.userRepository = new UserRepository()
@@ -22,4 +23,4 @@ class UserService {
     }
 }
 
-export default UserService
+export default UserService;

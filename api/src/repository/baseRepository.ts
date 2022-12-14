@@ -1,7 +1,8 @@
-import { Model, Schema } from "mongoose"
-import { IBooking } from "../model/booking"
+import { Model, Schema } from "mongoose";
+import { IBooking } from "../utils/types";
 
 class BaseRepository {
+
     public checkBooking = async (Book: Model<IBooking, {}, {}, {}, any>, bookingId: string | Schema.Types.ObjectId) => {
         const slot = await Book.find({ _id: bookingId })
 
@@ -21,4 +22,4 @@ class BaseRepository {
     }
 }
 
-export default BaseRepository
+export default BaseRepository;

@@ -1,7 +1,8 @@
-import { NextFunction, Request, Response } from "express"
+import { NextFunction, Request, Response } from "express";
 import UserService from '../service/userService';
 
 class UserController {
+
     userService: UserService;
     constructor() {
         this.userService = new UserService()
@@ -29,4 +30,4 @@ class UserController {
     }
 }
 
-export default UserController
+export default UserController;

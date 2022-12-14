@@ -1,8 +1,8 @@
-import express, { json } from 'express'
-import cors from 'cors'
-import './database'
-import ErrorHandler from './utils/errorHandler'
-import router from './route'
+import express, { json } from 'express';
+import cors from 'cors';
+import './database';
+import ErrorHandler from './utils/errorHandler';
+import router from './route';
 
 const app = express()
 

@@ -1,13 +1,5 @@
-import {Schema, model, Document, Types} from 'mongoose'
-
-export interface IBooking extends Document {
-    meetingName: string,
-    userId: Types.ObjectId,
-    date: string,
-    technology: string[],
-    startTime: string,
-    endTime: string,
-}
+import { Schema, model, Document, Types } from 'mongoose';
+import { IBooking } from '../utils/types';
 
 const bookingSchema = new Schema({
     meetingName: {
@@ -34,4 +26,4 @@ const bookingSchema = new Schema({
         timestamps: true
     })
 
-export default model<IBooking>('booking', bookingSchema)
+export default model<IBooking>('booking', bookingSchema);

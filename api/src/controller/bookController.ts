@@ -1,8 +1,9 @@
-import { Request, Response, NextFunction } from 'express'
-import BookService from '../service/bookService'
-import ResponseWrapper from '../utils/responseWrapper'
+import { Request, Response, NextFunction } from 'express';
+import BookService from '../service/bookService';
+import ResponseWrapper from '../utils/responseWrapper';
 
 class BookController {
+
     bookService: BookService
     responseWrapper: ResponseWrapper
     constructor() {
@@ -67,6 +68,15 @@ class BookController {
             next(err)
         }
     }
+
+    public getAllUserDetails =async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const getAllUser = await this.bookService.getAllUserDetails()
+        }
+        catch (err) {
+            next(err)
+        }
+    }
 }
 
-export default BookController
+export default BookController;

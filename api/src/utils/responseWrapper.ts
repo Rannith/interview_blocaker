@@ -1,4 +1,5 @@
 class ResponseWrapper {
+    
     public success = (message: string, results: object | any, statusCode: number) => {
         return {
             message,
@@ -24,4 +25,4 @@ class ResponseWrapper {
     }
 }
 
-export default ResponseWrapper
+export default ResponseWrapper;

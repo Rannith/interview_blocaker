@@ -1,7 +1,8 @@
-import { NextFunction, Request, Response } from "express"
-import TimeService from "../service/timeService"
+import { NextFunction, Request, Response } from "express";
+import TimeService from "../service/timeService";
 
 class TimeController {
+
     timeService: TimeService
     constructor() {
         this.timeService = new TimeService()
@@ -19,4 +20,4 @@ class TimeController {
     }
 }
 
-export default TimeController
+export default TimeController;

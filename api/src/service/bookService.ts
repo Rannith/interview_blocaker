@@ -1,10 +1,13 @@
-import BookRepository from "../repository/bookRepository"
-import Booking, { IBooking } from '../model/booking'
-import Technology from "../model/technology"
-import { ObjectId, Schema, UpdateQuery } from "mongoose"
+import BookRepository from "../repository/bookRepository";
+import Booking from '../model/booking';
+import { IBooking } from "../utils/types";
+import User from '../model/user';
+import Technology from "../model/technology";
+import { ObjectId, Schema, UpdateQuery } from "mongoose";
 import dayjs from 'dayjs';
 
 class BookService {
+    
     bookRepository: BookRepository
     constructor() {
         this.bookRepository = new BookRepository()
@@ -33,10 +36,6 @@ class BookService {
             dateCopy = new Date()
 
         const getFriday = new Date(dateCopy.setDate(dateCopy.getDate() + ((7 - dateCopy.getDay() + 5) % 7 || 7)))
-        // const nextFridayCopy = getFriday
-        // const getLastFriday = new Date(nextFridayCopy.setDate(nextFridayCopy.getDate() - 8))
-        // console.log("last frid : ", getLastFriday);
-        // console.log("commin frid : ", getFriday)
 
         const getMyBookings = await this.bookRepository.getMyBookings(Booking, userId, getFriday)
 
@@ -59,6 +58,34 @@ class BookService {
         const updateBooking = await this.bookRepository.updateBooking(Booking, bookingId, bookingPayload)
 
         return updateBooking
+    }
+
+    public getAllUserDetails = async () => {
+        const tuesday = new Date(new Date(new Date().setDate(new Date().getDate() + ((7 - new Date().getDay() + 2) % 7 || 7))))
+        const getAllUserDetails = await this.bookRepository.getAllUserDetails(Booking, tuesday)
+
+        const users = await User.find()
+        let userArray: any = []
+
+        users.map(user => {
+            if (getAllUserDetails.length <= 0) {        //if no user booked the slot from last tues to current week tues -> storing the user to an array
+                userArray.push(user._id)
+            } else {                                    //
+                getAllUserDetails.forEach(element => {
+                    if (element.userId.toString() !== user._id.toString()) {
+                        if (!userArray.includes(user._id)) {   
+                            userArray.push(user._id)
+                        } 
+                    }
+                })
+            }
+        })
+
+        const notInUser = await User.find({_id: {$in: userArray}})
+
+        console.log("user : ", notInUser)
+
+        return notInUser
     }
 }
 

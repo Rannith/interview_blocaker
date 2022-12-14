@@ -1,8 +1,5 @@
-import {Schema, model, Document, Types} from 'mongoose'
-
-export interface ITechnology extends Document {
-    techlology: string
-}
+import {Schema, model, Document, Types} from 'mongoose';
+import { ITechnology } from '../utils/types';
 
 const technologySchema = new Schema({
     technology: {
@@ -10,4 +7,4 @@ const technologySchema = new Schema({
     }
 })
 
-export default model<ITechnology>('technology', technologySchema)
+export default model<ITechnology>('technology', technologySchema);

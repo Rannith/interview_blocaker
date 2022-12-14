@@ -1,7 +1,8 @@
-import { Model, Types } from "mongoose"
-import { IUser } from "../model/user"
+import { Model, Types } from "mongoose";
+import { IUser } from "../utils/types";
 
 class UserRepository {
+
     public registerUser = async (user: IUser & { _id: Types.ObjectId }) => {
         const dbResult = await user.save()
 
@@ -15,4 +16,4 @@ class UserRepository {
     }
 }
 
-export default UserRepository
+export default UserRepository;

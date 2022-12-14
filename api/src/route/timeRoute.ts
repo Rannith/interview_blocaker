@@ -6,4 +6,4 @@ const time = new TimeController()
 
 timeRouter.post('/', time.checkAvailableTime)
 
-export default timeRouter
+export default timeRouter;

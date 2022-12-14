@@ -1,10 +1,11 @@
 import Booking from "../model/booking";
 import TimeRepository from "../repository/timeRepository";
-import * as config from '../utils/config'
+import * as config from '../utils/config';
 import dayjs from 'dayjs';
 import { ObjectId } from 'mongoose';
 
 class TimeService {
+    
     timeRepository: TimeRepository;
     constructor() {
         this.timeRepository = new TimeRepository()
@@ -34,7 +35,6 @@ class TimeService {
                 || inStartTime < startedTime && startedTime < inEndTime
                 || inStartTime < endedTime && endedTime < inEndTime
             ) {
-                // result = { message: `you have booked time slot of ${dayjs(element.startTime).format('h:mm A')} to ${dayjs(element.endTime).format('h:mm A')},please booked another time slot` }
                 throw ({ status: 400, message: `you have booked time slot of ${dayjs(element.startTime).format('h:mm A')} to ${dayjs(element.endTime).format('h:mm A')},please book another time slot` })
             }
         })
@@ -44,4 +44,4 @@ class TimeService {
     }
 }
 
-export default TimeService
+export default TimeService;
